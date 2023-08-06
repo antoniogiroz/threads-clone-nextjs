@@ -3,11 +3,14 @@ import { currentUser } from "@clerk/nextjs";
 
 export default async function Page() {
   const user = await currentUser();
+  if (!user) {
+    return null;
+  }
 
   const userInfo: any = {};
 
   const userData = {
-    id: user?.id,
+    id: user.id,
     objectId: userInfo?._id,
     username: userInfo?.username || user?.username,
     name: userInfo?.name || user?.firstName || "",
