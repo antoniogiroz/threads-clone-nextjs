@@ -1,5 +1,5 @@
 import { ProfileHeader } from "@/components/shared/profile-header";
-import { ThreadsTab } from "@/components/threads-tab";
+import { ThreadsTab } from "@/components/shared/threads-tab";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { profileTabs } from "@/constants";
 import { fetchUser } from "@/lib/actions/user.actions";
@@ -31,7 +31,7 @@ export default async function Page({ params }: Props) {
         authUserId={user.id}
         name={userInfo.name}
         username={userInfo.username}
-        imageUrl={userInfo.image}
+        imgUrl={userInfo.image}
         bio={userInfo.bio}
       />
 

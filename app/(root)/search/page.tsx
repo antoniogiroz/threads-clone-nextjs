@@ -5,16 +5,20 @@ import { Searchbar } from "@/components/shared/searchbar";
 import { Pagination } from "@/components/shared/pagination";
 import { fetchUser, fetchUsers } from "@/lib/actions/user.actions";
 
-export default async function Page({
-  searchParams,
-}: {
+interface Props {
   searchParams: { [key: string]: string | undefined };
-}) {
+}
+
+export default async function Page({ searchParams }: Props) {
   const user = await currentUser();
-  if (!user) return null;
+  if (!user) {
+    return null;
+  }
 
   const userInfo = await fetchUser(user.id);
-  if (!userInfo?.onboarded) redirect("/onboarding");
+  if (!userInfo?.onboarded) {
+    redirect("/onboarding");
+  }
 
   const result = await fetchUsers({
     userId: user.id,

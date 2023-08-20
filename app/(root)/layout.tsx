@@ -6,6 +6,7 @@ import { Bottombar } from "@/components/shared/bottombar";
 import { LeftSidebar } from "@/components/shared/left-sidebar";
 import { RightSidebar } from "@/components/shared/right-sidebar";
 import { Topbar } from "@/components/shared/topbar";
+import { dark } from "@clerk/themes";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,7 +21,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider>
+    <ClerkProvider
+      appearance={{
+        baseTheme: dark,
+      }}
+    >
       <html lang="en">
         <body className={inter.className}>
           <Topbar />

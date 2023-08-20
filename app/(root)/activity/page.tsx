@@ -1,16 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
-import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
-
+import { currentUser } from "@clerk/nextjs";
 import { fetchUser, getActivity } from "@/lib/actions/user.actions";
 
-async function Page() {
+export default async function Page() {
   const user = await currentUser();
-  if (!user) return null;
+  if (!user) {
+    return null;
+  }
 
   const userInfo = await fetchUser(user.id);
-  if (!userInfo?.onboarded) redirect("/onboarding");
+  if (!userInfo?.onboarded) {
+    redirect("/onboarding");
+  }
 
   const activity = await getActivity(userInfo._id);
 
@@ -48,5 +51,3 @@ async function Page() {
     </>
   );
 }
-
-export default Page;

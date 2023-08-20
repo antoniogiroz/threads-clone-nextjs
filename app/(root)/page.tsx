@@ -1,21 +1,23 @@
 import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
-
 import { ThreadCard } from "@/components/cards/thread-card";
-
 import { fetchThreads } from "@/lib/actions/thread.actions";
 import { fetchUser } from "@/lib/actions/user.actions";
 
-async function Home({
-  searchParams,
-}: {
+interface Props {
   searchParams: { [key: string]: string | undefined };
-}) {
+}
+
+export default async function Home({ searchParams }: Props) {
   const user = await currentUser();
-  if (!user) return null;
+  if (!user) {
+    return null;
+  }
 
   const userInfo = await fetchUser(user.id);
-  if (!userInfo?.onboarded) redirect("/onboarding");
+  if (!userInfo?.onboarded) {
+    redirect("/onboarding");
+  }
 
   const result = await fetchThreads(
     searchParams.page ? +searchParams.page : 1,
@@ -50,5 +52,3 @@ async function Home({
     </>
   );
 }
-
-export default Home;

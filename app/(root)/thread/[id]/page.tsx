@@ -5,16 +5,24 @@ import { fetchUser } from "@/lib/actions/user.actions";
 import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 
-export default async function Page({ params }: { params: { id: string } }) {
+interface Props {
+  params: { id: string };
+}
+
+export default async function Page({ params }: Props) {
   if (!params.id) {
     return null;
   }
 
   const user = await currentUser();
-  if (!user) return null;
+  if (!user) {
+    return null;
+  }
 
   const userInfo = await fetchUser(user.id);
-  if (!userInfo?.onboarded) redirect("/onboarding");
+  if (!userInfo?.onboarded) {
+    redirect("/onboarding");
+  }
 
   const thread = await fetchThreadById(params.id);
 
@@ -22,7 +30,6 @@ export default async function Page({ params }: { params: { id: string } }) {
     <section className="relative">
       <div>
         <ThreadCard
-          key={thread._id}
           id={thread._id}
           currentUserId={user.id}
           parentId={thread.parentId}
@@ -37,7 +44,7 @@ export default async function Page({ params }: { params: { id: string } }) {
       <div className="mt-7">
         <Comment
           threadId={thread.id}
-          currentUserImg={userInfo.image}
+          currentUserImg={user.imageUrl}
           currentUserId={JSON.stringify(userInfo._id)}
         />
       </div>

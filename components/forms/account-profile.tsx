@@ -119,7 +119,7 @@ export function AccountProfile({ user, btnTitle }: Props) {
                 {field.value ? (
                   <Image
                     src={field.value}
-                    alt="profile photo"
+                    alt="profile_icon"
                     width={96}
                     height={96}
                     priority
@@ -128,7 +128,7 @@ export function AccountProfile({ user, btnTitle }: Props) {
                 ) : (
                   <Image
                     src="/assets/profile.svg"
-                    alt="profile photo"
+                    alt="profile_icon"
                     width={24}
                     height={24}
                     className="object-contain"
@@ -139,12 +139,11 @@ export function AccountProfile({ user, btnTitle }: Props) {
                 <Input
                   type="file"
                   accept="image/*"
-                  placeholder="Add a profile photo"
+                  placeholder="Add profile photo"
                   className="account-form_image-input"
                   onChange={(e) => handleImage(e, field.onChange)}
                 />
               </FormControl>
-              <FormMessage />
             </FormItem>
           )}
         />
@@ -153,7 +152,7 @@ export function AccountProfile({ user, btnTitle }: Props) {
           control={form.control}
           name="name"
           render={({ field }) => (
-            <FormItem className="flex flex-col gap-3">
+            <FormItem className="flex w-full flex-col gap-3">
               <FormLabel className="text-base-semibold text-light-2">
                 Name
               </FormLabel>
@@ -173,7 +172,7 @@ export function AccountProfile({ user, btnTitle }: Props) {
           control={form.control}
           name="username"
           render={({ field }) => (
-            <FormItem className="flex flex-col gap-3">
+            <FormItem className="flex w-full flex-col gap-3">
               <FormLabel className="text-base-semibold text-light-2">
                 Username
               </FormLabel>
@@ -193,7 +192,7 @@ export function AccountProfile({ user, btnTitle }: Props) {
           control={form.control}
           name="bio"
           render={({ field }) => (
-            <FormItem className="flex flex-col gap-3">
+            <FormItem className="flex w-full flex-col gap-3">
               <FormLabel className="text-base-semibold text-light-2">
                 Bio
               </FormLabel>
